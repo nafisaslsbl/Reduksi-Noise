@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reduksi Noise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3d9e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #00000;
+            margin-bottom: 20px;
+        }
+
+        .upload-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        label.upload-btn::before {
+            content: 'Choose Image';
+        }
+
+        label.upload-btn {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .upload-description {
+            font-size: 12px;
+            color: #888;
+            color: #fff;
+        }
+
+        input[type="number"] {
+            width: 50px;
+            margin-left: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reduksi Noise</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="file" class="upload-btn">
+                <span id="file-name" class="upload-description"></span>
+            </label>
+            <input type="file" name="file" id="file" accept="image/*" onchange="displayFileName()" required><br>
+            <label for="kernel_size">Kernel Size:</label>
+            <input type="number" name="kernel_size" id="kernel_size" min="3" value="3" required><br>
+            <label for="sigma">Sigma:</label>
+            <input type="number" name="sigma" id="sigma" step="0.1" min="0.1" value="1.0" required><br>
+            <input type="submit" value="Process">
+        </form>
+    </div>
+
+    <script>
+        function displayFileName() {
+            const fileInput = document.getElementById('file');
+            const fileNameSpan = document.getElementById('file-name');
+            fileNameSpan.textContent = fileInput.files[0].name;
+        }
+    </script>
+</body>
+</html>
